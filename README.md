@@ -22,7 +22,22 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**4. Projeyi Çalıştırın:**
+**4. Groq API Anahtarını Ayarlayın:**
+
+`.env example` dosyasını kopyalayarak `.env` dosyası oluşturun ve anahtarınızı girin:
+```bash
+cp ".env example" .env
+```
+Ardından `.env` dosyasını açıp `GROQ_API_KEY` değerini doldurun:
+```
+GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxx
+```
+
+> **Not:** API anahtarınızı `.env` dosyasına eklemek zorunda değilsiniz.  
+> Uygulamayı başlattıktan sonra **Streamlit arayüzündeki yan panelden** (sidebar) de girebilirsiniz.  
+> Groq API anahtarı almak için → https://console.groq.com
+
+**5. Projeyi Çalıştırın:**
 ```bash
 streamlit run frontend/app.py
 ```
