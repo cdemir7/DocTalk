@@ -10,10 +10,10 @@
 
 ## 2. Agile Sprint Planı
 
-### Sprint 1: Ortam Kurulumu ve Altyapı
+### (Tamamlandı) Sprint 1: Ortam Kurulumu ve Altyapı 
 **Hedef:** Projenin temel iskeletini ayağa kaldırmak.
 
-- [ ] **Gereksinim Yönetimi:**
+- [x] **Gereksinim Yönetimi (Tamamlandı):**
   - Groq API hesabı oluşturulması ve API key alınması.
 
 - [x] **Klasör Yapısı Oluşturulması (Tamamlandı):**
@@ -21,25 +21,25 @@
   - API Endpoint'leri: `backend/routers/upload.py` (Dosya), `backend/routers/chat.py` (Sohbet)
   - Veri Modelleri: `backend/models/schemas.py` (Pydantic request/response şemaları)
   - Servis Katmanları: `services/document_service.py`, `services/chunking_service.py`, `services/vector_service.py`, `services/embedding_service.py`, `services/llm_service.py`
-- [ ] **Ortam Değişkenleri Yönetimi:**
+- [x] **Ortam Değişkenleri Yönetimi (Tamamlandı):**
   - `.env` dosyasının oluşturulması, `GROQ_API_KEY` 
 - [x] **Arayüz (Streamlit) Prototipi (Tamamlandı):**
   - Kullanıcıdan dosya alan, sol panelde ayarları, sağ asıl panelde ise Chat arayüzünü gösteren giriş şablonu oluşturulması (`frontend/app.py`).
 
 ---
 
-### Sprint 2: Belge İşleme (Parsing & Chunking) Modülleri
+### (Tamamlandı) Sprint 2: Belge İşleme (Parsing & Chunking) Modülleri
 **Hedef:** Kullanıcıdan gelen dosyaları temiz metinlere ayırmak ve token limitlerine uygun chunk'ları yaratmak.
 
-- [ ] **Parsing İşlemleri (`backend/services/document_service.py` & `backend/routers/upload.py`):**
+- [x] **Parsing İşlemleri (`backend/services/document_service.py` & `backend/routers/upload.py`) (Tamamlandı):**
   - **PDF İşleyici (PyMuPDF4LLM):** `pymupdf4llm.to_markdown` metodu ile belgenin sayfalarındaki metinlerin ve tabloların standart Markdown formatına doğrudan çıkarılması.
   - **Word Dosyası İşleyici (docx2pdf → PyMuPDF4LLM):** `PyMuPDF4LLM` docx desteklemiyor. Bu yüzden `docx2pdf` kütüphanesi ile `.docx` dosyası önce geçici bir PDF'e dönüştürülür, ardından aynı `pymupdf4llm.to_markdown` pipeline'ından geçirilir. Böylece tüm dosya tipleri tek tip bir işlem zincirinden geçer.
   - **TXT Dosyası İşleyici:** Python'un yerleşik `open()` fonksiyonu ile `UTF-8` kodlamasında okunur; ardından gereksiz boşluklar, boş satırlar ve satır sonu karakterleri (`\r\n → \n`) normalize edilerek diğer tiplerdeki gibi tek bir ham metin string'ine dönüştürülür ve ortak pipeline'a beslenir.
-- [ ] **Chunking İşlemleri (`backend/services/chunking_service.py`):**
+- [x] **Chunking İşlemleri (`backend/services/chunking_service.py`) (Tamamlandı):**
   - **PDF / Word → Markdown Chunking:** `pymupdf4llm` çıktısı Markdown olduğu için `langchain.text_splitter.MarkdownTextSplitter` kullanılır; `#`, `##`, `###` header seviyelerine göre bağlam korunarak bölünür.
   - **TXT → Düz Metin Chunking:** TXT dosyaları Markdown header içermez; `MarkdownTextSplitter` bu dosyaları tek bir chunk olarak görür. Bu nedenle `.txt` için `langchain.text_splitter.RecursiveCharacterTextSplitter` kullanılır; ayırıcı sırası `["\n\n", "\n", ". ", " "]` şeklinde belirlenerek paragraf → cümle → kelime önceliğiyle doğal bölünme sağlanır.
   - `chunking_service.py` dosya tipini alarak yukarıdaki iki stratejiden birine yönlendiren `get_splitter(file_type)` fonksiyonu ile soyutlanır.
-- [ ] **Entegrasyon Testi (Sprint Çıktısı):**
+- [x] **Entegrasyon Testi (Sprint Çıktısı) (Tamamlandı):**
   - Projeye manuel bir PDF verilince `pymupdf4llm` ile hatasız Markdown'a dönüştüğünü, sonrasında `MarkdownTextSplitter` sayesinde anlamlı chunk'lar elde edildiğini konsolda görebilmeli.
 
 ---

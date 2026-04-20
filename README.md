@@ -4,7 +4,7 @@
 
 **1. Sanal Ortam Oluşturun:**
 ```bash
-python3 -m venv venv
+python3 -m venv ./.venv
 ```
 
 **2. Sanal Ortamı Aktif Edin:**
@@ -37,7 +37,17 @@ GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxxxxxx
 > Uygulamayı başlattıktan sonra **Streamlit arayüzündeki yan panelden** (sidebar) de girebilirsiniz.  
 > Groq API anahtarı almak için → https://console.groq.com
 
-**5. Projeyi Çalıştırın:**
+**5. Backend'i Başlatın (FastAPI):**
+
+```bash
+uvicorn backend.main:app --reload --port 8000
+```
+
+API çalışmaya başladığında aşağıdaki adreslere erişebilirsiniz:
+- **Swagger UI:** http://127.0.0.1:8000/docs
+- **Upload Endpoint:** `POST http://127.0.0.1:8000/upload`
+
+**6. Frontend'i Başlatın (Streamlit):**
 ```bash
 streamlit run frontend/app.py
 ```
