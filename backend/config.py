@@ -1,18 +1,30 @@
-from pathlib import Path
-from pydantic_settings import BaseSettings
+from dotenv import load_dotenv
+import os
 
+# .env dosyasını yükle
+load_dotenv()
 
-class Settings(BaseSettings):
-    groqApiKey: str = ""
-    rawUploadDirectory: Path = Path("uploads/raw")
-    parsedResourcesDirectory: Path = Path("uploads/parsed")
+class Settings:
+    # Gemini API
+    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    
+    # Gemini Model Ayarları
+    GEMINI_LLM_MODEL: str = "gemini-2.5-flash-preview-04-17"
+    GEMINI_EMBEDDING_MODEL: str = "models/text-embedding-004"
+    
+    # ChromaDB
+    CHROMA_PERSIST_DIR: str = os.getenv("CHROMA_PERSIST_DIR", "./chroma_db")
+    CHROMA_COLLECTION_NAME: str = "doctalk"
+    
+    # Chunking
+    CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", "256"))
+    CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", "30"))
+    
+    # Retrieval
+    TOP_K_RESULTS: int = int(os.getenv("TOP_K_RESULTS", "5"))
+    
+    # Desteklenen dosya formatları
+    SUPPORTED_EXTENSIONS: list = [".txt", ".pdf", ".doc", ".docx"]
 
-    model_config = {"env_file": ".env", "env_file_encoding": "utf-8", "extra": "ignore"}
-
-
+# Uygulama genelinde kullanılacak tek bir settings nesnesi
 settings = Settings()
-
-
-def ensureDirectoriesExist() -> None:
-    settings.rawUploadDirectory.mkdir(parents=True, exist_ok=True)
-    settings.parsedResourcesDirectory.mkdir(parents=True, exist_ok=True)
