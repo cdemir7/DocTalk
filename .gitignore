@@ -1,5 +1,1 @@
 .venv/
-.env
-__pycache__/
-uploads/
-.DS_Store
