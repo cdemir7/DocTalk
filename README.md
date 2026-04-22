@@ -28,6 +28,13 @@ pip install -r requirements.txt
 uvicorn backend.main:app --reload --port 8000
 ```
 
+**4. Frontend'i Başlatın (React UI):**
+
+```bash
+cd frontend
+npm run dev
+```
+
 API çalışmaya başladığında aşağıdaki adreslere erişebilirsiniz:
 - **Swagger UI:** http://127.0.0.1:8000/docs
 - **Upload Endpoint:** `POST http://127.0.0.1:8000/upload`

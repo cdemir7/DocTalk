@@ -1,0 +1,132 @@
+.doclist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.doclist-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 24px 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+}
+
+.doclist-empty-hint {
+  font-size: 11px;
+}
+
+.doclist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.doclist-check-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.doclist-count {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.doclist-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.doclist-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: background 0.12s, border-color 0.12s;
+  cursor: default;
+}
+
+.doclist-item:hover {
+  background: var(--bg);
+}
+
+.doclist-item.selected {
+  background: var(--primary-light);
+  border-color: #bfdbfe;
+}
+
+.doclist-checkbox {
+  flex-shrink: 0;
+  accent-color: var(--primary);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.doclist-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.doclist-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.doclist-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doclist-meta {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.doclist-remove {
+  border: none;
+  background: none;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  padding: 2px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.1s, background 0.1s;
+  opacity: 0;
+}
+
+.doclist-item:hover .doclist-remove {
+  opacity: 1;
+}
+
+.doclist-remove:hover {
+  color: var(--error);
+  background: var(--error-light);
+}
