@@ -1,0 +1,21 @@
+# Web Framework
+fastapi==0.136.0
+uvicorn[standard]==0.44.0
+
+# Ortam Değişkenleri
+python-dotenv==1.0.1
+
+# Veri Doğrulama
+pydantic==2.13.0
+pydantic-settings==2.13.1
+
+# Doküman Okuma
+pymupdf4llm==1.27.2.2
+python-docx==1.2.0
+python-multipart==0.0.26
+
+# Chunking
+langchain-text-splitters==1.1.2
+
+
+

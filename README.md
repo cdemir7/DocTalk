@@ -1,0 +1,33 @@
+# DocTalk
+
+## Kurulum ve Çalıştırma
+
+**1. Sanal Ortam Oluşturun:**
+```bash
+python3 -m venv ./.venv
+```
+
+**2. Sanal Ortamı Aktif Edin:**
+- Mac / Linux:
+```bash
+source .venv/bin/activate
+```
+- Windows:
+```bash
+.venv\Scripts\activate
+```
+
+**3. Gerekli Paketleri Yükleyin:**
+```bash
+pip install -r requirements.txt
+```
+
+**4. Backend'i Başlatın (FastAPI):**
+
+```bash
+uvicorn backend.main:app --reload --port 8000
+```
+
+API çalışmaya başladığında aşağıdaki adreslere erişebilirsiniz:
+- **Swagger UI:** http://127.0.0.1:8000/docs
+- **Upload Endpoint:** `POST http://127.0.0.1:8000/upload`
