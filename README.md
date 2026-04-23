@@ -32,9 +32,20 @@ uvicorn backend.main:app --reload --port 8000
 
 ```bash
 cd frontend
+npm install
 npm run dev
 ```
 
 API çalışmaya başladığında aşağıdaki adreslere erişebilirsiniz:
 - **Swagger UI:** http://127.0.0.1:8000/docs
 - **Upload Endpoint:** `POST http://127.0.0.1:8000/upload`
+
+**5. Vektör Aramasını Test Etme (FAISS):**
+
+Sisteme yüklediğiniz belgeler üzerinde semantic arama yapmak için terminalde `test_search.py` betiğini kullanabilirsiniz:
+
+```bash
+# Sanal ortam aktifken çalıştırın:
+python test_search.py "Aramak istediğiniz metin veya soru" --k 5
+```
+*(Not: `--k 5` parametresi en yakın 5 sonucu getirir. Varsayılan değer 3'tür.)*

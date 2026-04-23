@@ -1,9 +1,10 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import './App.css'
 import DocumentUploader from './components/DocumentUploader'
 import DocumentList from './components/DocumentList'
 import ChatPanel from './components/ChatPanel'
 import SummaryPanel from './components/SummaryPanel'
+import { apiGetDocuments, apiDeleteDocument } from './api/client'
 import type { UploadedDocument, ChatMessage } from './types'
 
 type Tab = 'chat' | 'summary'
@@ -13,7 +14,26 @@ export default function App() {
   const [selectedDocIds, setSelectedDocIds] = useState<string[]>([])
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [activeTab, setActiveTab] = useState<Tab>('chat')
+  const [docsLoading, setDocsLoading] = useState(true)
 
+  // -----------------------------------------------------------------------
+  // Sayfa yüklendiğinde kalıcı doküman listesini backend'den al
+  // -----------------------------------------------------------------------
+  useEffect(() => {
+    apiGetDocuments()
+      .then((docs) => {
+        setDocuments(docs)
+        setSelectedDocIds(docs.map((d) => d.docId))
+      })
+      .catch(() => {
+        // Backend henüz hazır değilse sessizce geç
+      })
+      .finally(() => setDocsLoading(false))
+  }, [])
+
+  // -----------------------------------------------------------------------
+  // Yükleme tamamlandığında listeye ekle
+  // -----------------------------------------------------------------------
   const handleUploaded = useCallback((docs: UploadedDocument[]) => {
     setDocuments((prev) => {
       const existingIds = new Set(prev.map((d) => d.docId))
@@ -26,7 +46,16 @@ export default function App() {
     })
   }, [])
 
-  const handleRemoveDoc = useCallback((docId: string) => {
+  // -----------------------------------------------------------------------
+  // Silme: backend'e DELETE isteği at, sonra state'i güncelle
+  // -----------------------------------------------------------------------
+  const handleRemoveDoc = useCallback(async (docId: string) => {
+    try {
+      await apiDeleteDocument(docId)
+    } catch (err) {
+      console.error('Silme hatası:', err)
+      // Hata olsa bile UI'dan kaldır (optimistic update kaldığı gibi olsun)
+    }
     setDocuments((prev) => prev.filter((d) => d.docId !== docId))
     setSelectedDocIds((prev) => prev.filter((id) => id !== docId))
     setMessages((prev) =>
@@ -53,12 +82,18 @@ export default function App() {
 
           <div className="sidebar-docs">
             <div className="sidebar-section-title">Yüklenen Belgeler</div>
-            <DocumentList
-              documents={documents}
-              selectedDocIds={selectedDocIds}
-              onSelectionChange={setSelectedDocIds}
-              onRemove={handleRemoveDoc}
-            />
+            {docsLoading ? (
+              <div style={{ padding: '12px', opacity: 0.5, fontSize: '0.85rem' }}>
+                Belgeler yükleniyor...
+              </div>
+            ) : (
+              <DocumentList
+                documents={documents}
+                selectedDocIds={selectedDocIds}
+                onSelectionChange={setSelectedDocIds}
+                onRemove={handleRemoveDoc}
+              />
+            )}
           </div>
         </aside>
 

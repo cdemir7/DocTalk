@@ -3,6 +3,7 @@ export interface UploadedDocument {
   docName: string;
   fileName: string;
   totalChunks: number;
+  createdAt?: string;
 }
 
 export interface Source {

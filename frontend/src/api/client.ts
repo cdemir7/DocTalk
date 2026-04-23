@@ -21,6 +21,19 @@ export async function apiUpload(files: File[]): Promise<UploadedDocument[]> {
   return handleResponse<UploadedDocument[]>(res);
 }
 
+export async function apiGetDocuments(): Promise<UploadedDocument[]> {
+  const res = await fetch('/documents');
+  return handleResponse<UploadedDocument[]>(res);
+}
+
+export async function apiDeleteDocument(docId: string): Promise<void> {
+  const res = await fetch(`/documents/${docId}`, { method: 'DELETE' });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({ detail: res.statusText }));
+    throw new Error(body.detail ?? 'Silme başarısız');
+  }
+}
+
 export async function apiChat(
   question: string,
   docIds: string[] | null,

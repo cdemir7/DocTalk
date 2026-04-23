@@ -47,7 +47,7 @@
 
 ---
 
-### Sprint 3: FAISS + Gemini Embedding + Indexleme (RAG altyapısı)
+### (Tamamlandı) Sprint 3: FAISS + Gemini Embedding + Indexleme (RAG altyapısı)
 **Hedef (basit anlatım):** Sprint 2’de “metne çevirip parçaladığımız (chunk)” içerikleri, bilgisayarın “anlam benzerliği” ile arayabilmesi için sayısal vektörlere (embedding) çeviriyoruz. Sonra bu vektörleri **FAISS**’te indeksleyip disk’e kaydediyoruz ki uygulama kapanıp açılsa bile “doküman hafızası” kaybolmasın.
 
 **Bu sprint sonunda kullanıcı açısından ne değişir?**
@@ -64,16 +64,16 @@
 #### 3.2. Embedding servisi (`backend/services/embedding_service.py`)
 **Neyi yapacak?** “Metin listesi” alıp “vektör listesi” döndürecek.
 
-- [ ] **API tasarımı**
+- [x] **API tasarımı**
   - `embed_texts(texts: list[str]) -> np.ndarray`
   - (opsiyonel) `embed_text(text: str) -> np.ndarray` (tek sorgu için)
-- [ ] **Model yükleme ve performans**
+- [x] **Model yükleme ve performans**
   - Model: **Gemini Embeddings** (Google GenAI)
   - İstemci uygulama açılışında bir kere hazırlanmalı (her çağrıda yeniden yaratılmamalı).
-- [ ] **Vektör standardı**
+- [x] **Vektör standardı**
   - `float32`
   - Cosine benzerliği için **normalize** (her vektörün uzunluğu 1 olacak şekilde)
-- [ ] **Hata dayanıklılığı**
+- [x] **Hata dayanıklılığı**
   - Boş string’leri filtrele/atla veya anlamlı hata üret.
 
 **Kabul kriterleri (DoD)**
@@ -84,17 +84,17 @@
 #### 3.3. FAISS vektör servisi (`backend/services/vector_service.py`)
 **Neyi yapacak?** Vektörleri “hızlı benzerlik araması” için saklayacak ve sorgu vektörüyle “en yakın k parça”yı bulacak.
 
-- [ ] **Index yapısı**
+- [x] **Index yapısı**
   - Cosine için pratik yaklaşım: embedding’ler normalize edilir, FAISS’te `IndexFlatIP` (inner product) kullanılır.
-- [ ] **Temel fonksiyonlar**
+- [x] **Temel fonksiyonlar**
   - `add_vectors(vectors, metadatas)`  
     - aynı sırada gelen `vectors[i]` ile `metadatas[i]` eşleşmeli
   - `search(query_vector, k) -> list[SearchHit]`  
     - skor + metadata döndürmeli
-- [ ] **Persist (kalıcılık)**
+- [x] **Persist (kalıcılık)**
   - FAISS: `uploads/faiss/index.faiss`
   - Metadata: başlangıç için `uploads/faiss/meta.json` (ileri aşamada `sqlite`’a geçilebilir)
-- [ ] **Metadata minimum alanlar**
+- [x] **Metadata minimum alanlar**
   - `doc_id`: sistem içi ID (UUID önerilir)
   - `doc_name`: kullanıcıya gösterilecek dosya adı
   - `chunk_index`: o dokümandaki sıra numarası
@@ -110,12 +110,12 @@
 #### 3.4. Upload akışına indexleme ekleme (`backend/routers/upload.py`)
 **Neyi yapacak?** “Parse + chunk” sonucunu alıp embedding/indexleme pipeline’ına sokacak.
 
-- [ ] **Çoklu dosya upload**
+- [x] **Çoklu dosya upload**
   - İstek: `files: list[UploadFile]`
   - Her dosya için: parse → chunk → embedding → faiss add
-- [ ] **Doküman kimliği yönetimi**
+- [x] **Doküman kimliği yönetimi**
   - Her upload edilen dosya için `doc_id` üret ve tüm chunk metadata’sına yaz.
-- [ ] **İndeksleme raporu döndürme**
+- [x] **İndeksleme raporu döndürme**
   - Yanıt: her doc için `doc_id`, `doc_name`, `chunk_count` (minimum)
 
 **Kabul kriterleri (DoD)**
@@ -247,7 +247,7 @@ Sprint 4’teki `/chat` RAG akışını “birden fazla dokümanda birlikte aram
 ### Sprint 6: React UI
 **Hedef:** Ödevin “minimum UI yeterli” şartını karşılayan React arayüzünü sıfırdan kurup backend ile entegre etmek.
 
-- [ ] **React proje kurulumu:**
+- [x] **React proje kurulumu:**
   - Sayfalar / bileşenler:
     - Upload alanı (çoklu dosya)
     - Chat ekranı (mesaj akışı)

@@ -17,5 +17,8 @@ python-multipart==0.0.26
 # Chunking
 langchain-text-splitters==1.1.2
 
-
+# Sprint 3: Embedding + Vektör Veritabanı
+langchain-google-genai==4.2.2
+faiss-cpu==1.13.2
+numpy==2.4.4
 

@@ -9,6 +9,7 @@ export default defineConfig({
       '/upload': 'http://localhost:8000',
       '/chat': 'http://localhost:8000',
       '/summarize': 'http://localhost:8000',
+      '/documents': 'http://localhost:8000',
     },
   },
 })

@@ -2,7 +2,22 @@ from pydantic import BaseModel
 from typing import List, Optional
 
 
+class ChunkMetadata(BaseModel):
+    doc_id: str
+    doc_name: str
+    chunk_index: int
+    chunk_text: str
+    source_path: str
+    created_at: str  # ISO 8601
+
+
+class SearchHit(BaseModel):
+    score: float
+    metadata: ChunkMetadata
+
+
 class ChunkItem(BaseModel):
+
     index: int
     content: str
 
@@ -15,6 +30,14 @@ class UploadResponse(BaseModel):
     parsedFilePath: str
     chunksFilePath: str
     totalChunks: int
+
+
+class DocumentInfo(BaseModel):
+    docId: str
+    docName: str
+    fileName: str
+    totalChunks: int
+    createdAt: str
 
 
 class Source(BaseModel):
