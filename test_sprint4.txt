@@ -1,0 +1,17 @@
+Python Programlama Dili
+
+Python, 1991 yılında Guido van Rossum tarafından geliştirilen, yüksek seviyeli ve genel amaçlı bir programlama dilidir. Python'un tasarım felsefesi, kodun okunabilirliğini ön plana çıkarır ve programcıların daha az kod satırıyla daha fazla iş yapmasını sağlar.
+
+Python'un Temel Özellikleri
+
+Python, dinamik tipli bir dildir. Bu, değişkenlerin tiplerini önceden bildirmeye gerek olmadığı anlamına gelir. Değişkenler, atanan değere göre otomatik olarak tiplerini alır.
+
+Python'da liste, sözlük ve küme gibi yerleşik veri yapıları çok güçlüdür. Listeler sıralı ve değiştirilebilir koleksiyonlardır. Sözlükler anahtar-değer çiftlerini saklar. Kümeler benzersiz elemanları içerir.
+
+Python Kullanım Alanları
+
+Python; veri bilimi, yapay zeka, web geliştirme ve otomasyon alanlarında yoğun biçimde kullanılmaktadır. NumPy ve Pandas kütüphaneleri veri analizi için kullanılır. TensorFlow ve PyTorch derin öğrenme modellerinin geliştirilmesinde tercih edilir. Django ve Flask popüler web çerçeveleridir.
+
+Pythonun Performansı
+
+Python, yorumlanan bir dil olduğu için C veya C++ gibi derlemeli dillerden daha yavaş çalışabilir. Ancak kritik performans gerektiren işlemler için NumPy gibi C tabanlı kütüphaneler kullanılarak bu sorun büyük ölçüde aşılabilir. PyPy gibi JIT derleyicileri de Python kodunu önemli ölçüde hızlandırabilir.
