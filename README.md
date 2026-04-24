@@ -22,13 +22,24 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-**4. Backend'i Başlatın (FastAPI):**
+**4. .env Dosyasını Ayarlayın:**
+
+Projeyi çalıştırmadan önce Google Gemini API anahtarına ihtiyacınız var:
+1. [Google AI Studio](https://aistudio.google.com/) adresine gidin.
+2. Hesabınıza giriş yapın ve yeni bir "API key" oluşturun.
+3. Proje dizininde bulunan `.env.example` dosyasını kopyalayarak yeni bir `.env` dosyası oluşturun.
+4. Oluşturduğunuz `.env` dosyasını açın ve `GEMINI_API_KEY` değerine aldığınız API anahtarını yapıştırın:
+   ```env
+   GEMINI_API_KEY="sizin_api_anahtariniz_buraya"
+   ```
+
+**5. Backend'i Başlatın (FastAPI):**
 
 ```bash
 uvicorn backend.main:app --reload --port 8000
 ```
 
-**4. Frontend'i Başlatın (React UI):**
+**6. Frontend'i Başlatın (React UI):**
 
 ```bash
 cd frontend
@@ -40,7 +51,7 @@ API çalışmaya başladığında aşağıdaki adreslere erişebilirsiniz:
 - **Swagger UI:** http://127.0.0.1:8000/docs
 - **Upload Endpoint:** `POST http://127.0.0.1:8000/upload`
 
-**5. Vektör Aramasını Test Etme (FAISS):**
+**7. Vektör Aramasını Test Etme (FAISS):**
 
 Sisteme yüklediğiniz belgeler üzerinde semantic arama yapmak için terminalde `test_search.py` betiğini kullanabilirsiniz:
 
