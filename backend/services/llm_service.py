@@ -47,9 +47,9 @@ Tüm yanıt Türkçe olmalıdır.""",
 
 # ── Model sırası (birincil başarısız olursa sıradakine geç) ───────────────────
 _MODEL_CHAIN = [
+    "gemini-3-flash-preview",
     "gemini-2.5-flash",
-    "gemini-1.5-flash",
-    "gemini-1.5-flash-8b",
+    "gemini-2.0-flash",
 ]
 
 # ── Retry ayarları ────────────────────────────────────────────────────────────
