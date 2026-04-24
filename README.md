@@ -21,7 +21,7 @@ Projenin arayüzüne ve çalışma mantığına dair görselleri aşağıda bula
 ## ✨ Öne Çıkan Özellikler
 
 - **Vektör Tabanlı Semantik Arama:** FAISS kütüphanesi sayesinde dokümanlar içerisinde sadece kelime eşleşmesi değil, anlam odaklı arama yapılır.
-- **Akıllı Soru-Cevap:** Google Gemini Pro modeli entegrasyonu ile doküman içeriğine dayalı, bağlamsal ve doğru yanıtlar üretilir.
+- **Akıllı Soru-Cevap:** Google Gemini Flash modeli entegrasyonu ile doküman içeriğine dayalı, bağlamsal ve doğru yanıtlar üretilir.
 - **Modern Teknik Mimari:** - **Backend:** FastAPI ile asenkron, hızlı ve ölçeklenebilir API servisleri.
   - **Frontend:** React ve TypeScript ile geliştirilmiş, kullanıcı deneyimi odaklı dinamik arayüz.
 - **Gelişmiş Belge İşleme:** Yüklenen belgelerin otomatik olarak parçalanması (chunking) ve embedding işlemlerinin yapılması.
@@ -34,9 +34,8 @@ Projenin arayüzüne ve çalışma mantığına dair görselleri aşağıda bula
 | :--- | :--- |
 | **Backend** | Python, FastAPI, Uvicorn |
 | **Frontend** | React, TypeScript, Vite, CSS |
-| **AI/ML** | Google Gemini API, LangChain (veya ilgili LLM wrapper) |
+| **AI/ML** | Google Gemini API, LangChain |
 | **Vektör DB** | FAISS (Facebook AI Similarity Search) |
-| **Araçlar** | Git, Npm, Pip, Dotenv |
 
 ---
 
