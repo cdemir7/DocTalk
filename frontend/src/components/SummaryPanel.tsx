@@ -3,6 +3,85 @@ import { apiSummarize } from '../api/client'
 import type { UploadedDocument, SummarizeResult, SummaryStyle } from '../types'
 import './SummaryPanel.css'
 
+// ── Lightweight Markdown → JSX renderer ──────────────────────────────────────
+function renderMarkdown(text: string): JSX.Element {
+  const lines = text.split('\n')
+  const elements: JSX.Element[] = []
+  let ulBuffer: string[] = []
+  let olBuffer: string[] = []
+  let key = 0
+
+  const flushUl = () => {
+    if (ulBuffer.length) {
+      elements.push(
+        <ul key={key++} className="md-ul">
+          {ulBuffer.map((item, i) => (
+            <li key={i} dangerouslySetInnerHTML={{ __html: inlineFormat(item) }} />
+          ))}
+        </ul>
+      )
+      ulBuffer = []
+    }
+  }
+  const flushOl = () => {
+    if (olBuffer.length) {
+      elements.push(
+        <ol key={key++} className="md-ol">
+          {olBuffer.map((item, i) => (
+            <li key={i} dangerouslySetInnerHTML={{ __html: inlineFormat(item) }} />
+          ))}
+        </ol>
+      )
+      olBuffer = []
+    }
+  }
+
+  for (const raw of lines) {
+    const line = raw.trimEnd()
+
+    // H2/H3 heading
+    if (/^###\s/.test(line)) {
+      flushUl(); flushOl()
+      elements.push(<h4 key={key++} className="md-h4" dangerouslySetInnerHTML={{ __html: inlineFormat(line.replace(/^###\s/, '')) }} />)
+    } else if (/^##\s/.test(line)) {
+      flushUl(); flushOl()
+      elements.push(<h3 key={key++} className="md-h3" dangerouslySetInnerHTML={{ __html: inlineFormat(line.replace(/^##\s/, '')) }} />)
+    } else if (/^#\s/.test(line)) {
+      flushUl(); flushOl()
+      elements.push(<h2 key={key++} className="md-h2" dangerouslySetInnerHTML={{ __html: inlineFormat(line.replace(/^#\s/, '')) }} />)
+    // Unordered list
+    } else if (/^[-*]\s/.test(line)) {
+      flushOl()
+      ulBuffer.push(line.replace(/^[-*]\s/, ''))
+    // Ordered list
+    } else if (/^\d+\.\s/.test(line)) {
+      flushUl()
+      olBuffer.push(line.replace(/^\d+\.\s/, ''))
+    // Empty line → paragraph break
+    } else if (line === '') {
+      flushUl(); flushOl()
+      elements.push(<div key={key++} className="md-spacer" />)
+    // Regular paragraph
+    } else {
+      flushUl(); flushOl()
+      elements.push(<p key={key++} className="md-p" dangerouslySetInnerHTML={{ __html: inlineFormat(line) }} />)
+    }
+  }
+  flushUl(); flushOl()
+
+  return <div className="md-body">{elements}</div>
+}
+
+/** Bold, italic, inline code */
+function inlineFormat(text: string): string {
+  return text
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code>$1</code>')
+}
+
+
 interface Props {
   documents: UploadedDocument[]
   selectedDocIds: string[]
@@ -31,7 +110,13 @@ export default function SummaryPanel({ documents, selectedDocIds }: Props) {
       const res = await apiSummarize(selectedDocIds, style)
       setResult(res)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Özetleme başarısız')
+      const msg = err instanceof Error ? err.message : 'Özetleme başarısız'
+      // 503 / 429 → kullanıcı dostu mesaj
+      if (msg.includes('503') || msg.includes('UNAVAILABLE') || msg.includes('429')) {
+        setError('Yapay zeka modeli şu an yoğun. Birkaç saniye bekleyip tekrar deneyin.')
+      } else {
+        setError(msg)
+      }
     } finally {
       setLoading(false)
     }
@@ -132,13 +217,28 @@ export default function SummaryPanel({ documents, selectedDocIds }: Props) {
           <div className="summary-result">
             <div className="summary-result-header">
               <h3 className="summary-result-title">Özet</h3>
-              <div className="summary-result-sources">
-                {result.sources.map((s) => (
-                  <span key={s.docId} className="summary-source-badge">{s.docName}</span>
-                ))}
+              <div className="summary-result-actions">
+                <div className="summary-result-sources">
+                  {result.sources.map((s) => (
+                    <span key={s.docId} className="summary-source-badge">{s.docName}</span>
+                  ))}
+                </div>
+                <button
+                  className="copy-btn"
+                  title="Panoya kopyala"
+                  onClick={() => navigator.clipboard.writeText(result.summary)}
+                >
+                  <svg viewBox="0 0 20 20" fill="currentColor" width="14" height="14">
+                    <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                    <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                  </svg>
+                  Kopyala
+                </button>
               </div>
             </div>
-            <div className="summary-text">{result.summary}</div>
+            <div className="summary-text">
+              {renderMarkdown(result.summary)}
+            </div>
           </div>
         )}
       </div>

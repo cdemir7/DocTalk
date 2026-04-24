@@ -9,8 +9,9 @@ from backend.services.llm_service import generate_answer
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 
-_MAX_CONTEXT_CHARS = 15_000
-_SNIPPET_LENGTH = 300
+# ── Limitler ──────────────────────────────────────────────────────────────────
+_MAX_CONTEXT_CHARS = 15_000   # bağlam için maksimum toplam karakter
+_SNIPPET_LENGTH    = 300      # kaynak snippet uzunluğu (karakter)
 
 
 @router.post("", response_model=ChatResponse)

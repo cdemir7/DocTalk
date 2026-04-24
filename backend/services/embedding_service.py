@@ -22,7 +22,6 @@ def _normalize(matrix: np.ndarray) -> np.ndarray:
     Her satır vektörünü birim vektöre dönüştürür.
     """
     norms = np.linalg.norm(matrix, axis=1, keepdims=True)
-    # Sıfır normlu vektörü olduğu gibi bırak.
     norms = np.where(norms == 0, 1.0, norms)
     return matrix / norms
 

@@ -8,7 +8,7 @@ class ChunkMetadata(BaseModel):
     chunk_index: int
     chunk_text: str
     source_path: str
-    created_at: str  # ISO 8601
+    created_at: str
 
 
 class SearchHit(BaseModel):

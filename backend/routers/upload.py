@@ -46,9 +46,7 @@ async def uploadDocuments(files: List[UploadFile] = File(...)):
         docId = uuid.uuid4().hex
         rawPath = _saveRawFile(file, docId)
 
-        # ----------------------------------------------------------------
-        # 1. Parse + Chunk
-        # ----------------------------------------------------------------
+        # ── 1. Parse + Chunk ───────────────────────────────────────────────
         try:
             parsedPath = parseDocument(rawPath)
             chunksPath = chunkDocument(parsedPath, suffix)
@@ -61,9 +59,7 @@ async def uploadDocuments(files: List[UploadFile] = File(...)):
 
         chunkCount = len(chunks)
 
-        # ----------------------------------------------------------------
-        # 2. Embedding
-        # ----------------------------------------------------------------
+        # ── 2. Embedding ────────────────────────────────────────────────
         chunkTexts = [c["content"] for c in chunks]
 
         nonEmptyPairs = [
@@ -88,9 +84,7 @@ async def uploadDocuments(files: List[UploadFile] = File(...)):
                 detail=f"Embedding hatası: {exc}",
             )
 
-        # ----------------------------------------------------------------
-        # 3. FAISS İndeksleme
-        # ----------------------------------------------------------------
+        # ── 3. FAISS İndeksleme ─────────────────────────────────────────  
         now = datetime.now(timezone.utc).isoformat()
         metadatas = [
             ChunkMetadata(
@@ -112,9 +106,7 @@ async def uploadDocuments(files: List[UploadFile] = File(...)):
                 detail=f"FAISS indeksleme hatası: {exc}",
             )
 
-        # ----------------------------------------------------------------
-        # 4. Yanıt
-        # ----------------------------------------------------------------
+        # ── 4. Yanıt ───────────────────────────────────────────────────────   
         results.append(
             UploadResponse(
                 docId=docId,

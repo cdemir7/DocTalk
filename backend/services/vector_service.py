@@ -112,7 +112,7 @@ class VectorStore:
 
         hits: list[SearchHit] = []
         for score, idx in zip(scores[0], indices[0]):
-            if idx < 0:  # FAISS geçersiz sonuç işareti
+            if idx < 0:
                 continue
             meta_dict = self._meta[idx]
             hits.append(
@@ -158,16 +158,13 @@ class VectorStore:
             if removed_count == 0:
                 return 0
 
-            # Tüm vektörleri reconstruct et
             all_vectors = np.array(
                 [self._index.reconstruct(i) for i in range(self._index.ntotal)],
                 dtype=np.float32,
             )
 
-            # Sadece tutulacak vektörleri al
             kept_meta = [self._meta[i] for i in keep_indices]
 
-            # Index'i sıfırla ve yeniden oluştur
             self._index = faiss.IndexFlatIP(self._dim)
             if keep_indices:
                 kept_vectors = all_vectors[keep_indices]
