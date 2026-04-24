@@ -1,7 +1,5 @@
 # 📄 DocTalk: AI-Powered Document Assistant
 
-![DocTalk Header](https://via.placeholder.com/1000x300?text=DocTalk+-+AI+Powered+Document+Assistant)
-
 **DocTalk**, modern LLM (Large Language Model) teknolojilerini vektör tabanlı arama ile birleştiren bir **RAG (Retrieval-Augmented Generation)** uygulamasıdır. Kullanıcıların yüklediği PDF ve metin belgelerini analiz eder, bu belgeler içinden semantik arama yapar ve Google Gemini API kullanarak doğal dilde soruları yanıtlar.
 
 ---
@@ -10,15 +8,13 @@
 
 Projenin arayüzüne ve çalışma mantığına dair görselleri aşağıda bulabilirsiniz:
 
-| Ana Panel (Dashboard) | Belge Analizi & Chat |
+| Ana Sayfa & Chat Ekranı (Dashboard) | Belge Analizi(Kısa Özet) |
 | :---: | :---: |
-| ![Ana Sayfa](docs/screenshots/home.png) | ![Soru Cevap](docs/screenshots/chat.png) |
+| ![Ana Sayfa](screenshots/sohbet.png) | ![Soru Cevap](screenshots/kisa-ozet.png) |
 
-| Vektör Arama Testi | Backend API (Swagger) |
+| Belge Analizi(Detaylı Özet) | Belge Analizi(Madde Madde Özet) |
 | :---: | :---: |
-| ![Arama](docs/screenshots/search_test.png) | ![Swagger](docs/screenshots/swagger.png) |
-
-> *İpucu: Görselleri eklemek için projenizde `docs/screenshots/` adında bir klasör oluşturup görselleri buraya yükledikten sonra yukarıdaki dosya yollarını güncelleyebilirsiniz.*
+| ![Arama](screenshots/detayli-ozet.png) | ![Swagger](screenshots/madde-madde.png) |
 
 ---
 
