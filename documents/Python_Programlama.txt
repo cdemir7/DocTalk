@@ -1,0 +1,39 @@
+PYTHON PROGRAMLAMA DİLİ: KAPSAMLI TEKNİK DÖKÜMAN
+
+1. GİRİŞ VE TARİHÇE
+Python, 1991 yılında Guido van Rossum tarafından geliştirilmeye başlanmış, yüksek seviyeli, yorumlanan ve nesne yönelimli bir programlama dilidir. Adını "Monty Python's Flying Circus" komedi grubundan alan bu dil, "okunabilirlik" felsefesi üzerine kurulmuştur. Python'ın sözdizimi (syntax), İngilizceye yakınlığı sayesinde hem yeni başlayanlar hem de profesyoneller için büyük kolaylık sağlar.
+
+2. TEMEL VERİ YAPILARI VE DEĞİŞKENLER
+Python'da değişken tanımlarken tür belirtmeye gerek yoktur (Dynamic Typing). 
+- Sayısal Türler: int (tamsayı), float (ondalıklı sayı), complex (karmaşık sayı).
+- Metin Türü: str (string). Karakter dizileri tek (') veya çift (") tırnak içinde tanımlanabilir.
+- Mantıksal Tür: bool (True/False).
+
+Koleksiyon Veri Türleri:
+- Liste (List): Değiştirilebilir, sıralı ve farklı türde öğeler içerebilir. Köşeli parantez [] ile tanımlanır.
+- Demet (Tuple): Değiştirilemez ve sıralıdır. Normal parantez () ile tanımlanır.
+- Küme (Set): Sırasızdır ve benzersiz öğelerden oluşur. Süslü parantez {} ile tanımlanır.
+- Sözlük (Dictionary): Anahtar-değer (key-value) çiftlerinden oluşur. Hızlı erişim sağlar.
+
+3. KONTROL YAPILARI VE DÖNGÜLER
+Akış yönetimi if-elif-else blokları ile sağlanır. Python'da girintileme (indentation), kod bloklarını belirlemek için zorunludur ve bu özelliğiyle diğer dillerden ayrılır.
+Döngüler ise 'for' ve 'while' olarak ikiye ayrılır. 'for' döngüsü genellikle belirli bir aralıkta (range) veya bir koleksiyonun üzerinde gezinmek için kullanılırken, 'while' döngüsü bir koşul doğru olduğu sürece çalışmaya devam eder.
+
+4. FONKSİYONLAR VE MODÜLERLİK
+Tekrar eden kod bloklarını engellemek için 'def' anahtar kelimesiyle fonksiyonlar tanımlanır. Python, varsayılan parametreler, değişken sayıda argümanlar (*args) ve anahtar kelime argümanları (**kwargs) desteğiyle esnek bir yapı sunar. Lambda fonksiyonları ise tek satırlık anonim işlevler oluşturmaya yarar.
+
+5. NESNE YÖNELİMLİ PROGRAMLAMA (OOP)
+Python'da her şey bir nesnedir. 'class' yapısı ile sınıflar oluşturulur. Kalıtım (inheritance), çok biçimlilik (polymorphism) ve kapsülleme (encapsulation) prensipleri tam olarak desteklenir. '__init__' metodu, bir sınıftan nesne türetilirken çalışan kurucu (constructor) metodudur.
+
+6. HATA YÖNETİMİ (EXCEPTION HANDLING)
+Programın çalışma anında çökmesini engellemek için try-except-finally blokları kullanılır. Bu sayede dosya okuma hataları, ağ bağlantı sorunları veya kullanıcıdan kaynaklı hatalar şık bir şekilde yönetilebilir.
+
+7. POPÜLER KÜTÜPHANELER VE KULLANIM ALANLARI
+Python bugün birçok farklı disiplinde lider konumdadır:
+- Veri Bilimi ve Analizi: Pandas (veri manipülasyonu), NumPy (matematiksel işlemler), Matplotlib/Seaborn (görselleştirme).
+- Yapay Zeka ve Derin Öğrenme: TensorFlow, PyTorch, Scikit-learn.
+- Web Geliştirme: Django (kapsamlı framework), Flask (mikro framework).
+- Otomasyon ve Scripting: Selenium, BeautifulSoup (web kazıma), OS/Shutil (sistem işlemleri).
+
+8. SONUÇ
+Python, sunduğu zengin standart kütüphane ve devasa topluluk desteği ile modern yazılım dünyasının vazgeçilmez bir parçasıdır. "Zen of Python" prensipleri (import this), basitliğin karmaşıklıktan daha iyi olduğunu vurgular. Hem akademik araştırmalarda hem de endüstriyel büyük ölçekli projelerde Python tercihi her geçen gün artmaktadır.
