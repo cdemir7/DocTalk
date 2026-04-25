@@ -4,6 +4,8 @@
 
 ---
 
+Proje Tanıtım Videosu: https://youtu.be/bs8mOjw_3xU
+
 ## 📸 Ekran Görüntüleri
 
 Projenin arayüzüne ve çalışma mantığına dair görselleri aşağıda bulabilirsiniz:
