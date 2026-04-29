@@ -6,6 +6,9 @@
 
 Proje Tanıtım Videosu: https://youtu.be/bs8mOjw_3xU
 
+## Akış Diyagramı
+![Akış Diyagramı](screenshots/akis-diyagrami.png)
+
 ## 📸 Ekran Görüntüleri
 
 Projenin arayüzüne ve çalışma mantığına dair görselleri aşağıda bulabilirsiniz:
